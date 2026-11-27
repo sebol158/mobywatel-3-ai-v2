@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    try {
+      const savedScheme = localStorage.getItem("color-scheme");
+      if (savedScheme === "light" || savedScheme === "dark") {
+        document.querySelector('meta[name="color-scheme"]').content = savedScheme;
+      }
+    } catch {}
+  </script>
+  <title>Start | mObywatel 3.0 AI — Wersja 2.0 Calm UI</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon-mobywatel.svg" type="image/svg+xml">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a href="#phone-main-heading" class="skip-link visually-hidden">Przejdź do widoku aplikacji</a>
+  <div id="live-announcer" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+
+  <div class="workspace-shell">
+    <!-- Lewy kokpit prezentacyjny dla Jury Sejmu RP -->
+    <aside class="jury-sidebar" aria-label="Panel sterowania prezentacją dla Jury">
+      <div class="rp-ribbon" aria-hidden="true"><span></span><span></span></div>
+      <div class="sidebar-brand">
+        <span class="contest-chip">WERSJA 2.0 • CALM UI 2026</span>
+        <h2 class="sidebar-title">mObywatel 3.0 AI</h2>
+        <p class="sidebar-sub">Uproszczony interfejs 2026: <strong>Obywatel ⇄ mFirma</strong>, bezramkowe karty, Dark Mode, PWA i nowe usługi 2026.</p>
+      </div>
+
+      <button type="button" class="sim-btn sim-btn--ksef" id="btn-start-tour">
+        ▶️ Pokaz 60 s z przewodnikiem (6 kroków)
+      </button>
+
+      <nav class="flow-nav" aria-label="Ścieżki prezentacji dla Jury">
+        <p class="section-kicker">ŚCIEŻKI PROTOTYPU (KLIKNIJ, ABY PRZEJŚĆ)</p>
+        <ul role="list" class="flow-list" id="jury-flow-list">
+          <li><button type="button" class="flow-btn is-active" data-flow="hub">01 • Start: Ekran główny (Calm UI)</button></li>
+          <li><button type="button" class="flow-btn flow-btn--accent" data-flow="mfirma">02 • Tryb mFirma (KSeF + Start firmy)</button></li>
+          <li><button type="button" class="flow-btn flow-btn--accent" data-flow="auto_choice">03 • Kupno / Sprzedaż Auta (2 Opcje)</button></li>
+          <li><button type="button" class="flow-btn flow-btn--accent" data-flow="doc_scan_sign">04 • NOWOŚĆ: Skaner PDF + Podpis PZ + Wyślij do</button></li>
+          <li><button type="button" class="flow-btn" data-flow="hospital">05 • Szpital i SOR w 5 s (NFC + IKP + ICE)</button></li>
+          <li><button type="button" class="flow-btn" data-flow="caller_shield">06 • NOWOŚĆ: Tarcza „Kto dzwoni?” (Bank/Policja)</button></li>
+          <li><button type="button" class="flow-btn" data-flow="kw">07 • NOWOŚĆ: Księgi Wieczyste 2.0 (Hipoteka)</button></li>
+          <li><button type="button" class="flow-btn" data-flow="pension">08 • NOWOŚĆ: Moja Emerytura 360° (ZUS+PPK)</button></li>
+          <li><button type="button" class="flow-btn" data-flow="znak">09 • Dokumenty (Stos Kart + Zegar + 18+)</button></li>
+          <li><button type="button" class="flow-btn flow-btn--accent" data-flow="dzieci_id">10 • NOWOŚĆ: Dowody dzieci (Zosia i Leon)</button></li>
+          <li><button type="button" class="flow-btn" data-flow="zero_hub">11 • Usługi bez formularzy + Szukaj</button></li>
+          <li><button type="button" class="flow-btn" data-flow="tracker">12 • Ślad Danych i prywatność AI</button></li>
+          <li><button type="button" class="flow-btn" data-flow="senior">13 • Tryb Seniora WCAG AAA</button></li>
+          <li><button type="button" class="flow-btn flow-btn--accent" data-flow="contrast_by">14 • NOWOŚĆ: Kontrast Czarno-Żółty (WCAG AAA)</button></li>
+        </ul>
+      </nav>
+
+      <div class="sim-controls">
+        <p class="section-kicker">SYMULATORY NA ŻYWO</p>
+        <div class="hc-switch-card">
+          <span class="hc-switch-label">Wysoki kontrast (Czarno-Żółty)</span>
+          <button type="button" class="hc-switch-btn" id="btn-sim-contrast-by" aria-pressed="false" aria-label="Przełącz czarno-żółty tryb wysokiego kontrastu">
+            <span class="hc-pill hc-pill--off">Wył</span>
+            <span class="hc-pill hc-pill--on">Wł</span>
+          </button>
+        </div>
+        <button type="button" class="sim-btn sim-btn--ksef" id="btn-sim-ksef">
+          🔔 Symuluj nową fakturę KSeF FA(3)
+        </button>
+        <button type="button" class="sim-btn sim-btn--alert" id="btn-sim-call">
+          📞 Symuluj telefon „z banku / Policji”
+        </button>
+        <button type="button" class="sim-btn" id="btn-sim-dark" aria-pressed="false">
+          🌙 Przełącz motyw Jasny / Ciemny
+        </button>
+        <button type="button" class="sim-btn" id="btn-sim-offline" aria-pressed="false">
+          📶 Symuluj słaby zasięg (Offline 2 s)
+        </button>
+        <button type="button" class="sim-btn" id="btn-sim-senior" aria-pressed="false">
+          👓 Przełącz Tryb Seniora WCAG AAA
+        </button>
+        <button type="button" class="sim-btn sim-btn--svg" id="btn-open-svgs">
+          📐 Pobierz 15 makiet .svg v2 do Figmy
+        </button>
+        <a href="https://www.figma.com/proto/C2KrpiCs5oL98egDGCkBUj?node-id=5-35&starting-point-node-id=5-35" target="_blank" rel="noopener" class="sim-btn" style="text-decoration:none;display:flex;align-items:center">
+          🎨 Otwórz makietę w Figma
+        </a>
+      </div>
+    </aside>
+
+    <!-- Centralny interaktywny telefon iPhone 16 (393x852) -->
+    <main class="stage-main">
+      <!-- Przewodnik 60 s dla Jury (modern-web-guidance: persistent-app-tours) -->
+      <div id="jury-tour-popover" class="tour-popover" role="dialog" popover="manual" aria-labelledby="tour-step-title">
+        <div class="tour-kicker" id="tour-step-counter">POKAZ DLA JURY · KROK 1 Z 6</div>
+        <h2 id="tour-step-title" class="tour-title">Calm UI 2026</h2>
+        <p id="tour-step-body" class="tour-body"></p>
+        <div class="tour-actions">
+          <button type="button" class="back-chip" id="btn-tour-prev">← Wstecz</button>
+          <button type="button" class="btn btn--primary" id="btn-tour-next" style="inline-size:auto;min-block-size:38px;padding:6px 14px">Dalej →</button>
+          <button type="button" class="back-chip" id="btn-tour-close" popovertarget="jury-tour-popover" popovertargetaction="hide">Zamknij</button>
+        </div>
+      </div>
+
+      <div class="phone-frame" id="phone-frame">
+        <!-- Pasek statusu iOS -->
+        <header class="phone-statusbar">
+          <span class="status-time">9:41</span>
+          <div class="status-indicators">
+            <span class="net-pill" id="net-status-pill">5G · Online</span>
+            <svg aria-hidden="true" width="22" height="11" viewBox="0 0 22 11" fill="none">
+              <rect x="0.7" y="0.7" width="18" height="9.6" rx="2.5" stroke="currentColor" stroke-width="1.3"/>
+              <rect x="2.3" y="2.3" width="14.5" height="6.4" rx="1.3" fill="currentColor"/>
+              <rect x="19.8" y="3.5" width="1.6" height="4" rx="0.8" fill="currentColor"/>
+            </svg>
+          </div>
+        </header>
+
+        <!-- Powiadomienie Push (np. KSeF Alert) -->
+        <div id="phone-toast" class="phone-toast" hidden role="status"></div>
+
+        <!-- Globalny nagłówek z pojedynczą tarczą RP i przełącznikiem Obywatel ⇄ mFirma -->
+        <div class="app-topbar" id="app-topbar">
+          <div class="brand-lockup">
+            <div class="rp-shield" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                <path d="M10 2L16 5V10.5C16 14.3 13.4 17.5 10 18.5C6.6 17.5 4 14.3 4 10.5V5L10 2Z" fill="#FFFFFF" fill-opacity="0.22" stroke="#FFFFFF" stroke-width="1.6"/>
+                <path d="M7.5 8.5L10 6.5L12.5 8.5M10 6.5V14M7.5 11.5H12.5" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span class="brand-name">mObywatel</span>
+          </div>
+
+          <div class="context-switcher" role="group" aria-label="Przełącznik trybu Obywatel lub mFirma">
+            <button type="button" class="ctx-pill is-selected" id="ctx-citizen" aria-pressed="true">Obywatel</button>
+            <button type="button" class="ctx-pill" id="ctx-business" aria-pressed="false">
+              mFirma <span class="ctx-dot" id="ksef-unread-dot" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Baner Offline-First 2s Fallback -->
+        <div id="offline-banner" class="offline-banner" hidden>
+          <strong>Tryb offline aktywny:</strong> słaby zasięg — korzystasz z lokalnej kopii dokumentów i zbliżeniowego NFC bez zawieszania aplikacji.
+        </div>
+
+        <!-- Dynamiczna treść ekranu z kierunkowym View Transition -->
+        <div class="screen-viewport" id="screen-body"></div>
+
+        <!-- Dolna nawigacja: 4 naturalne etykiety -->
+        <nav class="bottom-tabbar" id="bottom-tabbar" aria-label="Dolna nawigacja mObywatel">
+          <button type="button" class="tab-item is-active" data-nav="hub">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 10.5L12 3L21 10.5V20H15V14H9V20H3V10.5Z" stroke="currentColor" stroke-width="1.85" stroke-linejoin="round"/></svg>
+            <span>Start</span>
+          </button>
+          <button type="button" class="tab-item" data-nav="znak">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.85"/><circle cx="8.5" cy="12" r="2" stroke="currentColor" stroke-width="1.8"/><path d="M13 10H18M13 14H17" stroke="currentColor" stroke-width="1.85" stroke-linecap="round"/></svg>
+            <span>Dokumenty</span>
+          </button>
+          <button type="button" class="tab-item" data-nav="zero_hub">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.85"/><rect x="13" y="4" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.85"/><rect x="4" y="13" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.85"/><rect x="13" y="13" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.85"/></svg>
+            <span>Usługi</span>
+          </button>
+          <button type="button" class="tab-item" data-nav="assistant">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3L14.4 8.6L20 11L14.4 13.4L12 19L9.6 13.4L4 11L9.6 8.6L12 3Z" stroke="currentColor" stroke-width="1.85" stroke-linejoin="round"/></svg>
+            <span>Asystent</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Prawy skrót argumentów z Audytu 2026 dla Jury -->
+      <aside class="audit-notes" aria-label="Kontekst audytu i benchmarku 2026">
+        <p class="section-kicker">DLACZEGO TEN EKRAN WYGRYWA (V2 CALM UI)</p>
+        <h3 id="note-title" class="note-title">Od przeładowanych kafelków do Calm UI 2026</h3>
+        <p id="note-body" class="note-body">
+          Wersja 2.0 redukuje ilość tekstu w aplikacji o ~45%, usuwa zbędne ramki i duplikaty wejść oraz zamienia skróty techniczne na język codzienny obywatela.
+        </p>
+        <div class="benchmark-pill-box" id="note-benchmark">
+          Benchmark: <strong>GOV.UK Plain Language</strong> + <strong>Apple Calm UI</strong> + <strong>App IO</strong> + <strong>Diia</strong>
+        </div>
+        <div class="kpi-mini-grid">
+          <div class="kpi-mini"><strong>&lt; 2 s</strong><span>Czytelność ekranu</span></div>
+          <div class="kpi-mini"><strong>4,2 s NFC</strong><span>Szpital i SOR</span></div>
+          <div class="kpi-mini"><strong>93,50 zł</strong><span>Oszczędność PoRD</span></div>
+          <div class="kpi-mini"><strong>0 ankiet</strong><span>Once-Only API</span></div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Natywny modal <dialog closedby="any"> z light-dismiss -->
+  <dialog id="app-dialog" closedby="any" aria-labelledby="dialog-title">
+    <div class="dialog-box">
+      <div class="dialog-header">
+        <h2 id="dialog-title" class="dialog-title">Szczegóły dokumentu</h2>
+        <button type="button" class="dialog-close-btn" id="dialog-close-btn" aria-label="Zamknij okno">✕</button>
+      </div>
+      <div id="dialog-content" class="dialog-content"></div>
+    </div>
+  </dialog>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
