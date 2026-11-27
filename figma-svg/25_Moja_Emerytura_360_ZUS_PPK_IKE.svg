@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="393" height="852" viewBox="0 0 393 852" fill="none">
+  <g id="25_Moja_Emerytura_360_CalmUI">
+    <rect id="Screen_BG" x="0" y="0" width="393" height="852" rx="40" fill="#F2F4F8" stroke="#CBD5E1" stroke-width="1.5"/>
+    <g id="StatusBar_iOS">
+      <rect x="0" y="0" width="393" height="44" fill="#FFFFFF"/>
+      <text x="24" y="27" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="14" font-weight="700" fill="#0F172A">9:41</text>
+      <rect x="304" y="13" width="65" height="18" rx="9" fill="#F0FDF4"/>
+      <text x="336" y="25" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="10" font-weight="700" fill="#059669">5G · Online</text>
+    </g>
+    <g id="TopBar_Clean">
+      <rect x="0" y="44" width="393" height="54" fill="#FFFFFF"/>
+      <line x1="0" y1="98" x2="393" y2="98" stroke="#E2E8F0" stroke-width="1"/>
+      <rect x="18" y="56" width="30" height="30" rx="9" fill="#DC143C"/>
+      <path d="M33 62L39 65V70.5C39 74.2 36.5 77 33 78C29.5 77 27 74.2 27 70.5V65L33 62Z" stroke="#FFFFFF" stroke-width="1.5"/>
+      <text x="56" y="76" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="16" font-weight="800" fill="#0F172A">mObywatel</text>
+      <rect x="248" y="55" width="127" height="32" rx="16" fill="#EEF1F6"/>
+      <rect x="251" y="58" width="60" height="26" rx="13" fill="#0052CC"/>
+      <text x="281" y="75" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF">Obywatel</text>
+      <text x="343" y="75" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11" font-weight="700" fill="#475569">mFirma</text>
+    </g>
+    <text x="20" y="128" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="20" font-weight="800" fill="#0F172A">Moja Emerytura 360°</text>
+    <g id="Card_1">
+      <rect x="20" y="144" width="353" height="104" rx="20" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+      <text x="36" y="166" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="10.5" font-weight="700" fill="#0052CC">Łączny kapitał emerytalny (ZUS + PPK + OFE + IKE)</text>
+      <text x="36" y="185" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="14.5" font-weight="800" fill="#0F172A">418 640 zł · Prognoza: 5 420 zł / mies.</text>
+      <text x="36" y="205" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="12" font-weight="500" fill="#475569">Skonsolidowany widok wszystkich 4 filarów</text>
+      <text x="36" y="222" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="12" font-weight="500" fill="#475569">oszczędności w jednym miejscu bez 4 logowań.</text>
+    </g>
+    <g id="Card_2">
+      <rect x="20" y="260" width="353" height="104" rx="20" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1"/>
+      <text x="36" y="282" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="10.5" font-weight="700" fill="#059669">Symulacja +2 lata pracy</text>
+      <text x="36" y="301" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="14.5" font-weight="800" fill="#0F172A">6 310 zł / mies. „na rękę” (+16%)</text>
+      <text x="36" y="321" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="12" font-weight="500" fill="#475569">ZUS: 312 400 zł · PPK: 48 900 zł · IKE/IKZE:</text>
+      <text x="36" y="338" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="12" font-weight="500" fill="#475569">31 200 zł · OFE: 26 140 zł.</text>
+    </g>
+    <g id="Primary_CTA">
+      <rect x="20" y="714" width="353" height="50" rx="14" fill="#059669"/>
+      <text x="196.5" y="744" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="13.5" font-weight="800" fill="#FFFFFF">Przelicz wariant +2 lata pracy</text>
+    </g>
+    <g id="Bottom_TabBar">
+      <rect x="0" y="782" width="393" height="70" fill="#FFFFFF"/>
+      <line x1="0" y1="782" x2="393" y2="782" stroke="#E2E8F0"/>
+      <text x="49" y="822" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11" font-weight="700" fill="#64748B">Start</text>
+      <text x="147" y="822" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11" font-weight="700" fill="#64748B">Dokumenty</text>
+      <rect x="206" y="790" width="78" height="48" rx="12" fill="#EEF4FF"/>
+      <text x="245" y="822" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11" font-weight="800" fill="#0052CC">Usługi</text>
+      <text x="344" y="822" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11" font-weight="700" fill="#64748B">Asystent</text>
+    </g>
+  </g>
+</svg>
