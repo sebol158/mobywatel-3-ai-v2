@@ -1,0 +1,18 @@
+{
+  "name": "mObywatel 3.0 AI — Wersja 2.0 (Calm UI)",
+  "short_name": "mObywatel 3.0",
+  "description": "Prototyp konkursowy mObywatel Challenge (mobywatel.ai): Stos Dokumentów, Tryb mFirma KSeF/ADE, Auto 2 opcje, Szpital 5s, Tarcza Kto dzwoni, Księgi Wieczyste 2.0.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f2f4f8",
+  "theme_color": "#ffffff",
+  "lang": "pl",
+  "icons": [
+    {
+      "src": "./icon-mobywatel.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

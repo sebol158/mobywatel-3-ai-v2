@@ -1,0 +1,14 @@
+{
+  "name": "mobywatel-3-ai-v2",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 3000 --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --port 3000 --host 0.0.0.0"
+  },
+  "devDependencies": {
+    "vite": "^6.2.0"
+  }
+}
