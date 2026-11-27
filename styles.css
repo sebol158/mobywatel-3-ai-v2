@@ -331,7 +331,7 @@ body.contrast-by-mode :is(.wallet-pill-btn, .wallet-emblem, .mdowod-holo-badge, 
   color: #ffd600;
   border: 1.5px solid #ffd600;
 }
-body.contrast-by-mode .wallet-pill-btn[aria-pressed="true"] {
+body.contrast-by-mode :is(.wallet-pill-btn[aria-pressed="true"], .wallet-pill-btn--danger[aria-pressed="true"]) {
   background: #ffd600;
   color: #000000;
   border-color: #ffd600;
@@ -1396,6 +1396,11 @@ body.senior-mode .btn { min-block-size: 58px; font-size: 17px; }
   color: #0f172a;
   border-color: #ffffff;
   font-weight: 800;
+}
+.wallet-pill-btn--danger[aria-pressed="true"] {
+  background: #dc143c;
+  color: #ffffff;
+  border-color: #fecdd3;
 }
 
 .wallet-details-panel {
