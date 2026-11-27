@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="393" height="852" viewBox="0 0 393 852" fill="none">
+  <defs>
+    <linearGradient id="gradAmberBike" x1="0" y1="0" x2="353" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#D9721E"/>
+      <stop offset="55%" stop-color="#E59A3C"/>
+      <stop offset="100%" stop-color="#ECC168"/>
+    </linearGradient>
+  </defs>
+  <g id="29_Moje_Pojazdy_Rowery_WIBEROO">
+    <rect id="Screen_BG" x="0" y="0" width="393" height="852" rx="40" fill="#F2F4F8" stroke="#CBD5E1" stroke-width="1.5"/>
+    <g id="StatusBar_iOS">
+      <rect x="0" y="0" width="393" height="44" fill="#FFFFFF"/>
+      <text x="24" y="27" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="14" font-weight="700" fill="#0F172A">9:41</text>
+      <rect x="304" y="13" width="65" height="18" rx="9" fill="#F0FDF4"/>
+      <text x="336" y="25" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="10" font-weight="700" fill="#059669">5G · Online</text>
+    </g>
+    <g id="TopBar_Clean">
+      <rect x="0" y="44" width="393" height="54" fill="#FFFFFF"/>
+      <line x1="0" y1="98" x2="393" y2="98" stroke="#E2E8F0"/>
+      <rect x="18" y="56" width="30" height="30" rx="9" fill="#DC143C"/>
+      <path d="M33 62L39 65V70.5C39 74.2 36.5 77 33 78C29.5 77 27 74.2 27 70.5V65L33 62Z" stroke="#FFFFFF" stroke-width="1.5"/>
+      <text x="56" y="76" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="16" font-weight="800" fill="#0F172A">mObywatel</text>
+      <rect x="248" y="55" width="127" height="32" rx="16" fill="#EEF1F6"/>
+      <rect x="251" y="58" width="60" height="26" rx="13" fill="#0052CC"/>
+      <text x="281" y="75" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF">Obywatel</text>
+      <text x="343" y="75" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11" font-weight="700" fill="#475569">mFirma</text>
+    </g>
+    <text x="22" y="132" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="21" font-weight="800" fill="#0F172A">Dokumenty · Moje pojazdy</text>
+    <g id="Card_Moje_Pojazdy_Rowery">
+      <rect x="20" y="152" width="353" height="444" rx="22" fill="url(#gradAmberBike)"/>
+      <text x="38" y="188" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="17" font-weight="800" fill="#FFFFFF">Moje pojazdy (Auto i rowery)</text>
+      <rect x="260" y="168" width="95" height="20" rx="10" fill="#FFFFFF" fill-opacity="0.22"/>
+      <text x="307" y="182" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="9.5" font-weight="800" fill="#FFFFFF">HOLOGRAM RP ✓</text>
+
+      <circle cx="44" cy="212" r="3.5" fill="#4ADE80"/>
+      <text x="54" y="216" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF">Krajowy Rejestr Rowerów · WIBEROO ✓</text>
+
+      <rect x="38" y="230" width="98" height="30" rx="15" fill="#FFFFFF" fill-opacity="0.16" stroke="#FFFFFF" stroke-opacity="0.5"/>
+      <text x="87" y="249" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF">🚗 Opel Astra</text>
+      <rect x="142" y="230" width="110" height="30" rx="15" fill="#FFFFFF"/>
+      <text x="197" y="249" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11" font-weight="800" fill="#0F172A">🚲 Kross Esker</text>
+      <rect x="258" y="230" width="97" height="30" rx="15" fill="#FFFFFF" fill-opacity="0.16" stroke="#FFFFFF" stroke-opacity="0.5"/>
+      <text x="306" y="249" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF">⚡ Ecobike</text>
+
+      <rect x="38" y="274" width="317" height="196" rx="14" fill="#451A03" fill-opacity="0.38" stroke="#FFFFFF" stroke-opacity="0.24"/>
+      <text x="52" y="298" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">Kross Esker 4.0 (Gravel · 2025)</text>
+      <text x="52" y="320" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11.5" font-weight="600" fill="#FEF3C7">Typ: Rower tradycyjny · Koła 28&quot;</text>
+      <text x="52" y="344" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11.5" font-weight="700" fill="#FFFFFF">Numer ramy: KR5402918PL</text>
+      <text x="52" y="368" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11.5" font-weight="600" fill="#FEF3C7">e-Znakowanie: KMP Gdańsk · PL-GD-48192 ✓</text>
+      <text x="52" y="392" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11.5" font-weight="600" fill="#FEF3C7">OC Rowerzysty + Casco PZU do 30.09.2027 ✓</text>
+      <text x="52" y="424" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11.5" font-weight="800" fill="#BBF7D0">Status: Własność potwierdzona · Niekradziony ✓</text>
+      <text x="52" y="448" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="10.5" font-weight="600" fill="#FDE68A">PCC-3 przy sprzedaży: 0 zł do 1 000 zł (powyżej 2%)</text>
+
+      <rect x="38" y="486" width="317" height="40" rx="12" fill="#FFFFFF"/>
+      <text x="196" y="511" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="12" font-weight="800" fill="#0F172A">🔍 Paszport QR i sprawdź numer ramy</text>
+      <rect x="38" y="536" width="317" height="40" rx="12" fill="#FFFFFF" fill-opacity="0.18" stroke="#FFFFFF" stroke-opacity="0.65"/>
+      <text x="196" y="561" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">🚨 Alert kradzieżowy roweru (Policja)</text>
+    </g>
+    <g id="Card_mDowod_Bottom">
+      <rect x="20" y="610" width="353" height="68" rx="20" fill="#054EB1"/>
+      <text x="38" y="650" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="16" font-weight="800" fill="#FFFFFF">mDowód (Sebastian M.)</text>
+    </g>
+    <g id="Prompt_Pill_Bikes">
+      <rect x="20" y="704" width="353" height="48" rx="24" fill="#FFFFFF" stroke="#E5E7EB"/>
+      <text x="40" y="733" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="13" font-weight="600" fill="#64748B">Sprawdź numer ramy roweru…</text>
+      <circle cx="347" cy="728" r="18" fill="#DC143C"/>
+      <text x="347" y="733" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="15" font-weight="800" fill="#FFFFFF">↑</text>
+    </g>
+    <g id="Bottom_TabBar">
+      <rect x="0" y="782" width="393" height="70" fill="#FFFFFF"/>
+      <line x1="0" y1="782" x2="393" y2="782" stroke="#E2E8F0"/>
+      <text x="49" y="822" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11" font-weight="700" fill="#64748B">Start</text>
+      <rect x="108" y="790" width="78" height="48" rx="12" fill="#EEF4FF"/>
+      <text x="147" y="822" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11" font-weight="800" fill="#0052CC">Dokumenty</text>
+      <text x="245" y="822" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11" font-weight="700" fill="#64748B">Usługi</text>
+      <text x="344" y="822" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="11" font-weight="700" fill="#64748B">Asystent</text>
+    </g>
+  </g>
+</svg>

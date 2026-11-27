@@ -1,5 +1,6 @@
 import {
   lookupVehicleByPlate,
+  lookupBicycleByFrame,
   COUNTERPARTY,
   SIMULATED_PUSH_INVOICE,
   WALLET_DOCUMENTS,
@@ -307,6 +308,7 @@ function bindScreenEvents() {
     if (/auto|umow|pojazd/i.test(q)) ans = "Otwórz „Kupno lub sprzedaż auta”: możesz zeskanować papierową umowę albo utworzyć cyfrową umowę P2P po wpisaniu rejestracji.";
     else if (/bank|blik|dzwon|oszust/i.test(q)) ans = "Użyj Tarczy „Kto dzwoni?” w Usługach — jeśli nie widzisz tam potwierdzenia z banku, to próba oszustwa. Rozłącz się od razu.";
     else if (/dzieck|dzieci|legitymacj/i.test(q)) ans = "W zakładce „Dokumenty” otwórz kartę „Dowody dzieci (2)” — znajdziesz tam mDowód i mLegitymację Zosi i Leona, IKP oraz zgodę na wyjazd/odbiór.";
+    else if (/rower|ebike|ram[ay]|wiberoo/i.test(q)) ans = "W zakładce „Dokumenty” otwórz „Moje pojazdy (Auto i rowery)” i wybierz swój rower Kross lub Ecobike — sprawdzisz numer ramy, OC, e-Znakowanie Policji i alert kradzieżowy.";
     else if (/szpital|sor|lek/i.test(q)) ans = "W „Szpital i SOR” przekażesz przez telefon ubezpieczenie, alergie z IKP i upoważnienie bliskiego w 5 sekund.";
     else if (/ksef|faktur|firm/i.test(q)) ans = "Przełącz na „mFirma” u góry ekranu — tam czekają faktury KSeF z załącznikami, e-Doręczenia oraz 1 Okienko startu firmy.";
     state.chatMessages.push({ role: "ai", text: ans });
@@ -350,6 +352,90 @@ function bindScreenEvents() {
   const headerZnakBtn = document.getElementById("btn-header-znak-qr");
   if (znakModalBtn) znakModalBtn.addEventListener("click", openZnakModal);
   if (headerZnakBtn) headerZnakBtn.addEventListener("click", openZnakModal);
+
+  screenEl.querySelectorAll("[data-select-mobility]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      state.selectedMobilityId = btn.dataset.selectMobility;
+      const bike = state.bicycles.find(b => b.id === state.selectedMobilityId);
+      announce(bike ? `Wybrano rower: ${bike.makeModel}` : "Wybrano pojazd: Opel Astra V");
+      renderAll();
+    });
+  });
+
+  const bikeStolenBtn = document.getElementById("btn-bike-stolen");
+  if (bikeStolenBtn) {
+    bikeStolenBtn.addEventListener("click", () => {
+      const bike = state.bicycles.find(b => b.id === state.selectedMobilityId);
+      if (!bike) return;
+      bike.stolen = !bike.stolen;
+      announce(bike.stolen
+        ? `Wysłano alert kradzieżowy Policji dla roweru ${bike.frameNo}`
+        : `Odwołano alert kradzieżowy dla roweru ${bike.frameNo}`);
+      renderAll();
+    });
+  }
+
+  const bikeVerifyBtn = document.getElementById("btn-bike-verify");
+  if (bikeVerifyBtn) {
+    bikeVerifyBtn.addEventListener("click", () => {
+      const bike = state.bicycles.find(b => b.id === state.selectedMobilityId) || state.bicycles[0];
+      const pcc = bike.defaultPrice > 1000 ? Math.round(bike.defaultPrice * 0.02) : 0;
+      openModal(`Paszport roweru · ${bike.shortLabel}`, `
+        <div class="card ${bike.stolen ? "card--critical" : "card--soft-emerald"}">
+          <strong>${bike.makeModel}</strong>
+          <div class="card-desc">
+            Numer ramy: <code>${bike.frameNo}</code><br>
+            ${bike.policeMark}<br>
+            Szacunkowa wartość: <strong>${bike.defaultPrice} zł</strong> · PCC-3 (2%): <strong>${pcc} zł</strong> (zwolnienie do 1 000 zł).
+          </div>
+        </div>
+        <form id="bike-frame-check-form" style="display:flex;flex-direction:column;gap:8px">
+          <div class="field-group">
+            <label for="bike-frame-input" class="field-label">Sprawdź numer ramy przed zakupem</label>
+            <span id="bike-frame-hint" class="field-hint">Np. RM2024881PL (legalny) lub WIB999112 (utracony)</span>
+            <div class="sub-nav-row">
+              <input id="bike-frame-input" name="frame" class="field-input" type="text" value="RM2024881PL" aria-describedby="bike-frame-hint" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" required style="flex:1">
+              <button type="submit" class="btn btn--primary" style="inline-size:auto">Sprawdź</button>
+            </div>
+          </div>
+          <div class="badge-row">
+            <button type="button" class="back-chip" data-test-frame="RM2024881PL">Test: RM2024881PL</button>
+            <button type="button" class="back-chip" data-test-frame="WIB999112">Test: skradziony WIB999112</button>
+          </div>
+        </form>
+        <div id="bike-check-result" role="status" aria-live="polite"></div>
+      `);
+
+      const renderLookup = (rawFrame) => {
+        const res = lookupBicycleByFrame(rawFrame, state.bicycles);
+        const resultEl = document.getElementById("bike-check-result");
+        if (!resultEl) return;
+        resultEl.innerHTML = `
+          <div class="card ${res.stolen ? "card--critical" : "card--soft-emerald"}">
+            <span class="kicker" style="color:${res.stolen ? "var(--brand-crimson)" : "var(--status-success)"}">${res.policeMark}</span>
+            <strong>${res.makeModel} (${res.frameNo})</strong>
+            <div class="card-desc">${res.alertInfo}</div>
+          </div>
+        `;
+      };
+
+      const frameForm = document.getElementById("bike-frame-check-form");
+      if (frameForm) {
+        frameForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const val = document.getElementById("bike-frame-input").value;
+          renderLookup(val);
+        });
+      }
+      dialogContentEl.querySelectorAll("[data-test-frame]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const inp = document.getElementById("bike-frame-input");
+          if (inp) inp.value = btn.dataset.testFrame;
+          renderLookup(btn.dataset.testFrame);
+        });
+      });
+    });
+  }
 
   screenEl.querySelectorAll("[data-select-child]").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -422,6 +508,10 @@ function bindScreenEvents() {
             </div>
             <span class="status-chip status-chip--ok">EUDI</span>
           </div>
+          <button type="button" class="row-item row-btn" id="btn-modal-go-bikes" style="min-block-size:48px">
+            <strong>🚲 Moje rowery (Kross i Ecobike)</strong>
+            <span>e-Znakowanie →</span>
+          </button>
           <button type="button" class="row-item row-btn card--critical" id="btn-modal-go-ekuz" style="min-block-size:48px">
             <strong>EKUZ i Karta Ratunkowa ICE</strong>
             <span>Szpital 5 s →</span>
@@ -435,6 +525,13 @@ function bindScreenEvents() {
           renderAll();
         });
       });
+      const goBikes = document.getElementById("btn-modal-go-bikes");
+      if (goBikes) {
+        goBikes.addEventListener("click", () => {
+          dialogEl.close();
+          navigateTo("rowery_id", "forward");
+        });
+      }
       const goEkuz = document.getElementById("btn-modal-go-ekuz");
       if (goEkuz) {
         goEkuz.addEventListener("click", () => {
@@ -861,7 +958,7 @@ document.getElementById("btn-sim-senior").addEventListener("click", () => {
 });
 
 document.getElementById("btn-open-svgs").addEventListener("click", () => {
-  openModal("15 makiet .svg (Wersja 2.0 Calm UI) do Figmy", `
+  openModal("16 makiet .svg (Wersja 2.0 Calm UI) do Figmy", `
     <p>Przeciągnij pliki z <code>mobywatel-3-ai-v2/figma-svg/</code> na kanwę Figmy:</p>
     <div style="display:flex;flex-direction:column;gap:6px">
       ${SVG_EXPORTS.map(s => `

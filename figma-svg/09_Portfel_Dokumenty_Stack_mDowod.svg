@@ -50,7 +50,7 @@
     </g>
     <g id="Card_Moje_Pojazdy">
       <rect x="20" y="156" width="353" height="90" rx="20" fill="url(#gradAmber)"/>
-      <text x="38" y="188" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="16" font-weight="800" fill="#FFFFFF">Moje pojazdy</text>
+      <text x="38" y="188" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="16" font-weight="800" fill="#FFFFFF">Moje pojazdy (Auto i rowery)</text>
       <rect x="322" y="168" width="34" height="34" rx="10" fill="#FFFFFF" fill-opacity="0.24"/>
       <path d="M225 228C231 213 244 204 264 203H292C307 203 318 211 323 228H225Z" fill="#FFFFFF" fill-opacity="0.58"/>
     </g>
