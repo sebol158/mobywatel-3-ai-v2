@@ -1,4 +1,5 @@
 import {
+  BICYCLES,
   lookupVehicleByPlate,
   INITIAL_KSEF_INVOICES,
   INITIAL_DELEGATIONS
@@ -26,6 +27,8 @@ const state = {
   contractPrice: 34500,
   contractMileage: 84210,
   expandedDocId: "mdowod",
+  selectedMobilityId: "astra",
+  bicycles: BICYCLES.map(b => ({ ...b })),
   selectedChildId: "zosia",
   showChildData: true,
   showMdowodData: false,
@@ -75,6 +78,7 @@ const ICONS = {
   home: `<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 10.5L12 3L21 10.5V20H15V14H9V20H3V10.5Z" stroke="currentColor" stroke-width="1.85" stroke-linejoin="round"/></svg>`,
   chart: `<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 19V5M4 19H20M8 15V11M13 15V8M18 15V6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>`,
   scanSign: `<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 7V5C4 3.9 4.9 3 6 3H9M15 3H18C19.1 3 20 3.9 20 5V7M20 17V19C20 20.1 19.1 21 18 21H15M9 21H6C4.9 21 4 20.1 4 19V17" stroke="currentColor" stroke-width="1.85" stroke-linecap="round"/><path d="M8 13C9.5 10.5 11.2 14.5 13 11.5C14 10 15 13 16.5 12" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  bike: `<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="6.5" cy="16.5" r="3.5" stroke="currentColor" stroke-width="1.85"/><circle cx="17.5" cy="16.5" r="3.5" stroke="currentColor" stroke-width="1.85"/><path d="M6.5 16.5L10 9H14L12 16.5M10 9L8.5 6H6.5M14 9L17.5 16.5M13 6H16" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   contrast: `<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 3A9 9 0 0 1 12 21V3Z" fill="currentColor"/></svg>`
 };
 
@@ -138,6 +142,11 @@ const SCREEN_NOTES = {
     title: "Dokumenty (Stos Kart) + Żywy zegar i hologram RP",
     body: "Tykający zegar co do sekundy i mieniący się hologram RP potwierdzają autentyczność na żywo, a stos kart i Znak 18+ ZKP mieszczą się w jednym czystym widoku.",
     bench: "Benchmark: Apple Wallet + France Identité (ZKP) + EUDI Wallet"
+  },
+  rowery_id: {
+    title: "Moje pojazdy: Rowery, E-Bike i e-Znakowanie Policji",
+    body: "Cyfrowy paszport roweru i E-Bike w karcie Moje pojazdy: numer ramy, policyjne e-Znakowanie WIBEROO, 1-klik zgłoszenie kradzieży oraz weryfikacja numeru ramy przed zakupem używanego roweru (0 zł PCC-3 do 1 000 zł).",
+    bench: "Benchmark: MyBike.belgium.be + Politi Cykelcheck (DK) + KGP WIBEROO"
   },
   dzieci_id: {
     title: "Dowody dzieci w telefonie rodzica (mDowód + mLegitymacja + IKP)",
@@ -290,6 +299,10 @@ function navigateTo(targetScreen, direction = "forward") {
     if (targetScreen === "dzieci_id") {
       state.expandedDocId = "dzieci";
       state.screen = "znak";
+    } else if (targetScreen === "rowery_id") {
+      state.expandedDocId = "pojazdy";
+      if (state.selectedMobilityId === "astra") state.selectedMobilityId = "kross";
+      state.screen = "znak";
     } else {
       state.screen = targetScreen;
     }
@@ -373,22 +386,27 @@ function updateShellChrome() {
     btn.classList.toggle("is-active", active);
   }
 
+  const isBikesView = state.screen === "znak" && state.expandedDocId === "pojazdy" && state.selectedMobilityId !== "astra";
   for (const fbtn of document.querySelectorAll(".flow-btn")) {
     const active = fbtn.dataset.flow === "contrast_by"
       ? (state.contrastByMode && state.screen === "hub")
-      : fbtn.dataset.flow === "dzieci_id"
-        ? (state.screen === "znak" && state.expandedDocId === "dzieci")
-        : fbtn.dataset.flow === "znak"
-          ? (state.screen === "znak" && state.expandedDocId !== "dzieci")
-          : (fbtn.dataset.flow === state.screen && !(state.contrastByMode && state.screen === "hub"));
+      : fbtn.dataset.flow === "rowery_id"
+        ? isBikesView
+        : fbtn.dataset.flow === "dzieci_id"
+          ? (state.screen === "znak" && state.expandedDocId === "dzieci")
+          : fbtn.dataset.flow === "znak"
+            ? (state.screen === "znak" && state.expandedDocId !== "dzieci" && !isBikesView)
+            : (fbtn.dataset.flow === state.screen && !(state.contrastByMode && state.screen === "hub"));
     fbtn.classList.toggle("is-active", active);
   }
 
   const noteKey = (state.contrastByMode && state.screen === "hub")
     ? "contrast_by"
-    : (state.screen === "znak" && state.expandedDocId === "dzieci")
-      ? "dzieci_id"
-      : (SCREEN_NOTES[state.screen] ? state.screen : (state.screen.startsWith("auto_") ? "auto_p2p" : "zero_hub"));
+    : isBikesView
+      ? "rowery_id"
+      : (state.screen === "znak" && state.expandedDocId === "dzieci")
+        ? "dzieci_id"
+        : (SCREEN_NOTES[state.screen] ? state.screen : (state.screen.startsWith("auto_") ? "auto_p2p" : "zero_hub"));
   const note = SCREEN_NOTES[noteKey] || SCREEN_NOTES.hub;
   document.getElementById("note-title").textContent = note.title;
   document.getElementById("note-body").textContent = note.body;

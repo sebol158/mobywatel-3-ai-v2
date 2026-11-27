@@ -79,6 +79,65 @@ export function lookupVehicleByPlate(raw) {
   };
 }
 
+export const BICYCLES = [
+  {
+    id: "kross",
+    shortLabel: "🚲 Kross Esker 4.0",
+    makeModel: "Kross Esker 4.0 (Gravel · 2025)",
+    typeBadge: "Rower tradycyjny · Koła 28\"",
+    frameNo: "KR5402918PL",
+    batteryNo: null,
+    policeMark: "KMP Gdańsk · PL-GD-48192 ✓",
+    insurance: "OC Rowerzysty + Casco PZU do 30.09.2027 ✓",
+    defaultPrice: 4200,
+    stolen: false
+  },
+  {
+    id: "ecobike",
+    shortLabel: "⚡ Ecobike RX 500",
+    makeModel: "Ecobike Traffic City (E-Bike 250W · 2026)",
+    typeBadge: "Rower elektryczny Pedelec (≤25 km/h)",
+    frameNo: "ECB882014PL",
+    batteryNo: "BAT-LG-504WH-991",
+    policeMark: "KMP Gdańsk · PL-GD-90411 ✓",
+    insurance: "Assistance baterii + OC Warta do 15.06.2027 ✓",
+    defaultPrice: 6800,
+    stolen: false
+  }
+];
+
+export function lookupBicycleByFrame(raw, ownedBicycles = BICYCLES) {
+  const clean = String(raw || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+  const owned = ownedBicycles.find(b => b.frameNo.toUpperCase() === clean);
+  if (owned) {
+    return {
+      frameNo: owned.frameNo,
+      makeModel: owned.makeModel,
+      stolen: Boolean(owned.stolen),
+      policeMark: owned.policeMark,
+      alertInfo: owned.stolen
+        ? "ZGŁOSZONO KRADZIEŻ w KMP Gdańsk — pojazd zablokowany do obrotu!"
+        : "Twój zarejestrowany rower · Własność potwierdzona w mObywatelu ✓"
+    };
+  }
+  if (clean.includes("KRADZ") || clean.includes("STOLEN") || clean === "WIB999112" || clean.endsWith("999")) {
+    return {
+      frameNo: clean || "WIB999112",
+      makeModel: "Trek Marlin 7 (MTB · 2024)",
+      stolen: true,
+      policeMark: "ALERT WIBEROO / SIS II",
+      alertInfo: "FIGURUJE JAKO UTRACONY — KMP Warszawa-Śródmieście (18.11.2026). Nie kupuj pojazdu!"
+    };
+  }
+  return {
+    frameNo: clean || "RM2024881PL",
+    makeModel: "Romet Wagant 6 (Trekking · 2024)",
+    stolen: false,
+    policeMark: "Krajowy Rejestr Rowerów WIBEROO ✓",
+    alertInfo: "Brak zgłoszenia kradzieży w bazie Policji — bezpieczny zakup P2P ✓"
+  };
+}
+
 export const COUNTERPARTY = {
   name: "Tomasz Nowak",
   peselMasked: "890412•••••",
@@ -169,6 +228,7 @@ export const INITIAL_DELEGATIONS = [
 ];
 
 export const DATA_TRACKER_LOGS = [
+  { time: "Dziś, 07:30", inst: "KGP — Rejestr Rowerów WIBEROO", reg: "e-Znakowanie Rowerów", reason: "Synchronizacja paszportu roweru Kross KR5402918PL", legal: "Twoje pojazdy", suspicious: false },
   { time: "Dziś, 08:41", inst: "CEPiK + UFG", reg: "Rejestr Pojazdów", reason: "Sprawdzenie auta GD 4829X przy umowie", legal: "Twoja zgoda", suspicious: false },
   { time: "25.11, 19:14", inst: "UCK w Gdańsku (SOR)", reg: "IKP i ubezpieczenie NFZ", reason: "Przekazanie karty alergii i leków przez telefon", legal: "Zbliżenie NFC", suspicious: false },
   { time: "24.11, 14:22", inst: "Sąd Rejonowy Gdańsk-Północ", reg: "Księgi Wieczyste", reason: "Wzmianka o wykreśleniu hipoteki", legal: "Czynność sądu", suspicious: false },
@@ -178,7 +238,7 @@ export const DATA_TRACKER_LOGS = [
 export const WALLET_DOCUMENTS = [
   {
     id: "pojazdy",
-    title: "Moje pojazdy",
+    title: "Moje pojazdy (Auto i rowery)",
     theme: "amber",
     emblem: "eagle",
     rows: [
@@ -298,6 +358,7 @@ export const SERVICES_CATALOG = [
   { go: "kw", iconKey: "home", colorCls: "icon-box--cobalt", title: "Księgi Wieczyste 2.0", desc: "Alert zmian w KW i wykreślenie hipoteki 1-klik", keywords: "mieszkanie dom hipoteka kw sąd bank kredyt" },
   { go: "pension", iconKey: "chart", colorCls: "icon-box--emerald", title: "Moja Emerytura 360°", desc: "Łącznie ZUS, PPK, OFE i IKE w jednym widoku", keywords: "emerytura zus ppk ofe ike ikze kapitał" },
   { go: "auto_choice", iconKey: "car", colorCls: "icon-box--cobalt", title: "Kupno / sprzedaż auta", desc: "Skan papierowej umowy lub cyfrowa umowa P2P", keywords: "samochód pojazd umowa pcc3 rejestracja oc cepik" },
+  { go: "rowery_id", iconKey: "bike", colorCls: "icon-box--amber", title: "Moje rowery i e-Znakowanie Policji", desc: "Paszport roweru, numer ramy, OC i alert kradzieży 1-klik", keywords: "rower rowery ebike kross ecobike numer ramy kradzież policja znakowanie wiberoo pojazd" },
   { go: "crash", iconKey: "car", colorCls: "icon-box--amber", title: "mStłuczka 2.0 (Offline i UE)", desc: "Spisanie kolizji bez sieci i z autem zagranicznym", keywords: "kolizja wypadek stłuczka offline ue oc" },
   { go: "job", iconKey: "briefcase", colorCls: "icon-box--cobalt", title: "Pierwszy dzień w pracy", desc: "Cyfrowa teczka HR, dyplom i e-PIT-2", keywords: "praca kadry hr dyplom pit zus" },
   { go: "bereave", iconKey: "heart", colorCls: "icon-box--indigo", title: "Wsparcie po stracie (6 w 1)", desc: "Akt zgonu, zasiłek ZUS 7 000 zł, banki i media", keywords: "zgon pogrzeb zasiłek zus spadek media" },
@@ -325,7 +386,7 @@ export const TOUR_STEPS = [
   {
     screen: "znak",
     title: "2. Stos Dokumentów + żywy hologram",
-    body: "Nakładające się karty (mDowód, Pojazdy, mPrawo jazdy, KDR) z tykającym zegarem co do sekundy, zastrzeżeniem PESEL i Znak 18+ ZKP."
+    body: "Nakładające się karty (mDowód, Auto i Rowery, mPrawo jazdy, KDR, Dzieci) z tykającym zegarem co do sekundy, zastrzeżeniem PESEL i Znak 18+ ZKP."
   },
   {
     screen: "caller_shield",
@@ -364,5 +425,6 @@ export const SVG_EXPORTS = [
   { file: "10_Slad_Danych_DataTracker_PLLuM_OptIn.svg", title: "10 • Ślad Danych i tryb prywatności AI" },
   { file: "26_Skaner_Dokumentow_PDF_Profil_Zaufany_WyslijDo.svg", title: "26 • NOWOŚĆ: Skaner PDF + Podpis PZ + Wyślij do" },
   { file: "27_Tryb_Wysokiego_Kontrastu_Czarno_Zolty_WCAG_AAA.svg", title: "27 • NOWOŚĆ: Kontrast Czarno-Żółty (Black & Yellow AAA)" },
-  { file: "28_Dowody_Dzieci_mDowod_mLegitymacja_IKP.svg", title: "28 • NOWOŚĆ: Dowody dzieci (mDowód + mLegitymacja + IKP)" }
+  { file: "28_Dowody_Dzieci_mDowod_mLegitymacja_IKP.svg", title: "28 • NOWOŚĆ: Dowody dzieci (mDowód + mLegitymacja + IKP)" },
+  { file: "29_Moje_Pojazdy_Rowery_eZnakowanie_Policja.svg", title: "29 • NOWOŚĆ: Moje pojazdy — Rowery i e-Znakowanie Policji" }
 ];

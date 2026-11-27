@@ -82,7 +82,7 @@ function renderHub() {
         <span class="icon-box icon-box--emerald">${ICONS.layers}</span>
         <div>
           <div class="tile-title">Więcej usług</div>
-          <div class="tile-sub">Emerytura · KW 2.0 · Stłuczka</div>
+          <div class="tile-sub">Rowery · Emerytura · KW 2.0</div>
         </div>
       </button>
     </div>
@@ -350,6 +350,13 @@ function renderAutoChoice() {
           : "Zeskanuj mObywatel kupującego oraz wskaż auto z mPojazdu lub po tablicy. Zbycie i OC zgłoszą się automatycznie."}
       </p>
       <button type="button" class="btn btn--primary" data-go="auto_p2p">Utwórz umowę w 60 s →</button>
+    </div>
+
+    <div class="card card--soft-amber">
+      <span class="kicker">Rowery i E-Bike · Rejestr WIBEROO</span>
+      <h2 class="card-title">Kupno, sprzedaż lub znakowanie roweru</h2>
+      <p class="card-desc">Sprawdź po numerze ramy, czy używany rower nie jest kradziony (0 zł PCC-3 do 1 000 zł, powyżej 1 000 zł podatek 2%).</p>
+      <button type="button" class="btn btn--secondary" data-go="rowery_id">Otwórz Moje rowery i weryfikator ramy →</button>
     </div>
   `;
 }

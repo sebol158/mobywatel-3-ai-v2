@@ -62,9 +62,12 @@ function renderZnak() {
   const cardsHtml = WALLET_DOCUMENTS.map((doc) => {
     const isExpanded = state.expandedDocId === doc.id;
     const carDecor = doc.id === "pojazdy"
-      ? `<svg class="wallet-car-peek" aria-hidden="true" width="118" height="32" viewBox="0 0 118 32" fill="none">
-           <path d="M8 31C14 14 28 5 49 4H79C96 4 108 13 114 31H8Z" fill="#e2e8f0" fill-opacity="0.72" stroke="#ffffff" stroke-opacity="0.85" stroke-width="2"/>
-           <path d="M23 27C28 15 39 10 53 9H75C87 9 96 15 101 27H23Z" fill="#475569" fill-opacity="0.55"/>
+      ? `<svg class="wallet-car-peek" aria-hidden="true" width="136" height="34" viewBox="0 0 136 34" fill="none">
+           <circle cx="15" cy="23" r="6.5" stroke="#ffffff" stroke-opacity="0.85" stroke-width="2"/>
+           <circle cx="35" cy="23" r="6.5" stroke="#ffffff" stroke-opacity="0.85" stroke-width="2"/>
+           <path d="M15 23L22 13H30L25 23M22 13L20 10H17M30 13L35 23" stroke="#ffffff" stroke-opacity="0.9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+           <path d="M48 31C53 15 66 6 85 5H111C126 5 133 14 136 31H48Z" fill="#e2e8f0" fill-opacity="0.72" stroke="#ffffff" stroke-opacity="0.85" stroke-width="2"/>
+           <path d="M61 27C65 16 75 11 88 10H107C117 10 125 16 129 27H61Z" fill="#475569" fill-opacity="0.55"/>
          </svg>`
       : "";
 
@@ -175,6 +178,51 @@ function renderZnak() {
               <button type="button" class="wallet-pill-btn" id="btn-child-consent" style="inline-size:100%;justify-content:center;min-block-size:38px;margin-block-start:2px">✈️ Zgoda na odbiór / wyjazd dziecka</button>
             </div>
           ` : ""}
+        </div>
+      `;
+    } else if (doc.id === "pojazdy") {
+      const isCar = state.selectedMobilityId === "astra";
+      const activeBike = state.bicycles.find(b => b.id === state.selectedMobilityId) || state.bicycles[0];
+      const liveText = isCar
+        ? "CEPiK + UFG · Aktualne ✓"
+        : (activeBike.stolen ? "ALERT POLICJI · ROWER UTRACONY !" : "Krajowy Rejestr Rowerów · WIBEROO ✓");
+      bodyHtml = `
+        <div class="wallet-card__body" ${isExpanded ? "" : "hidden"}>
+          <div class="mdowod-live-bar">
+            <span class="mdowod-live-time">
+              <span class="mdowod-live-dot" aria-hidden="true" style="${!isCar && activeBike.stolen ? "background:#f87171;box-shadow:0 0 8px #f87171" : ""}"></span>
+              <span>${liveText}</span>
+            </span>
+            <span class="mdowod-holo-badge">HOLOGRAM RP ✓</span>
+          </div>
+          <div class="mdowod-pills" style="padding:0 16px 10px" role="group" aria-label="Wybierz pojazd lub rower">
+            <button type="button" class="wallet-pill-btn" data-select-mobility="astra" aria-pressed="${isCar}">
+              <span>🚗 Opel Astra</span>
+            </button>
+            ${state.bicycles.map(b => `
+              <button type="button" class="wallet-pill-btn" data-select-mobility="${b.id}" aria-pressed="${state.selectedMobilityId === b.id}">
+                <span>${b.shortLabel}${b.stolen ? " 🚨" : ""}</span>
+              </button>
+            `).join("")}
+          </div>
+          ${isCar ? `
+            <div class="wallet-details-panel">
+              ${doc.rows.map(r => `<div class="wallet-detail-row"><span>${r.label}</span><strong>${r.value}</strong></div>`).join("")}
+              <button type="button" class="wallet-cta-btn" data-go="${doc.ctaScreen}">${doc.ctaLabel}</button>
+            </div>
+          ` : `
+            <div class="wallet-details-panel">
+              <div class="wallet-detail-row"><span>Rower</span><strong>${activeBike.makeModel}</strong></div>
+              <div class="wallet-detail-row"><span>Typ</span><strong>${activeBike.typeBadge}</strong></div>
+              <div class="wallet-detail-row"><span>Numer ramy</span><strong>${activeBike.frameNo}</strong></div>
+              ${activeBike.batteryNo ? `<div class="wallet-detail-row"><span>Numer baterii</span><strong>${activeBike.batteryNo}</strong></div>` : ""}
+              <div class="wallet-detail-row"><span>e-Znakowanie</span><strong>${activeBike.policeMark}</strong></div>
+              <div class="wallet-detail-row"><span>Ochrona / OC</span><strong>${activeBike.insurance}</strong></div>
+              <div class="wallet-detail-row"><span>Status w bazie</span><strong>${activeBike.stolen ? "🚨 ZGŁOSZONO KRADZIEŻ (KMP Gdańsk)" : "Własność potwierdzona · Niekradziony ✓"}</strong></div>
+              <button type="button" class="wallet-cta-btn" id="btn-bike-verify">🔍 Paszport QR i sprawdź numer ramy</button>
+              <button type="button" class="wallet-pill-btn wallet-pill-btn--danger" id="btn-bike-stolen" aria-pressed="${activeBike.stolen}" style="inline-size:100%;justify-content:center;min-block-size:38px;margin-block-start:2px">🚨 Alert kradzieżowy roweru (Policja)</button>
+            </div>
+          `}
         </div>
       `;
     } else {
